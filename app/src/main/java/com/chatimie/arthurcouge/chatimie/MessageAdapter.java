@@ -92,6 +92,7 @@ public class MessageAdapter extends RecyclerView.Adapter<MessageAdapter.MessageH
     }
 
     public void clearList(){
+        //MessageActivity.getMessagesBdd().removeAllMessages();
         listMessage.clear();
         notifyDataSetChanged();
     }

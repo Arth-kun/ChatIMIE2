@@ -67,6 +67,11 @@ public class MessagesBdd {
         return bdd.update(TABLE_MESSAGES, values, COL_ID + " = " +id, null);
     }
 
+    public int removeAllMessages(){
+        //Suppression d'un message de la BDD grâce à l'ID
+        return bdd.delete(TABLE_MESSAGES, null, null);
+    }
+
     public int removeMessageWithID(int id){
         //Suppression d'un message de la BDD grâce à l'ID
         return bdd.delete(TABLE_MESSAGES, COL_ID + " = " +id, null);

@@ -8,6 +8,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.net.Uri;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Looper;
 import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
@@ -32,6 +33,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Scanner;
@@ -50,17 +52,6 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
     private static MessagesBdd messagesBdd;
 
     public static MessagesBdd getMessagesBdd() { return messagesBdd; }
-    private static SharedPreferences sp;
-
-//    private SQLiteDatabase mDb;
-
-    public static SharedPreferences getSp() {
-        return sp;
-    }
-
-    public static void setSp(SharedPreferences sp) {
-        MessageActivity.sp = sp;
-    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,6 +111,9 @@ public class MessageActivity extends AppCompatActivity implements MessageAdapter
         }
 
         if (id == R.id.clear_message) {
+            messagesBdd.open();
+            messagesBdd.removeAllMessages();
+            messagesBdd.close();
             mAdapter.clearList();
             return true;
         }
